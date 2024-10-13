@@ -4,10 +4,10 @@ from abc import ABC, abstractmethod
 class Coche(ABC):
 
     # Constructor del coche generico
-    def __init__(self, letra: chr, posicion: list[int], largo: int):
+    def __init__(self, letra: chr, pos: list[int], tam: int):
         self.letra = str(letra).upper()[0]
-        self.posicion = posicion
-        self.largo = largo
+        self.pos = pos
+        self.tam = tam
 
     # Metodos abstractos que serán sobreescritos en sus hijos
     @abstractmethod

@@ -17,3 +17,11 @@ class CocheV(Coche):
     def devolver_casillas(self, direccion: chr) -> list[list[int]]:
         # TODO metodo
         pass
+
+    def __iter__(self):
+        # TODO metodo
+        pass
+
+    def __str__(self):
+        # TODO metodo
+        pass
