@@ -7,16 +7,12 @@ class CocheH(Coche):
         # TODO metodo
         pass
 
-    # Calcula el espacio para moverse HORIZONTALMENTE
-    def comprobar_espacio(self, direccion: chr) -> list[int]:
-        # TODO metodo
-        pass
+    # Calcula el espacio al que se va a mover HORIZONTALMENTE
+    # Para moverse hacia delante dirreccion es true y marcha atras es false
+    def calcular_espacio(self, direccion: bool) -> tuple[int, int]:
+        return (self.pos[0], self.pos[1]-1) if direccion else (self.pos[0], self.pos[1]+self.tam)
 
     # Calcula el espacio que ocupa el coche HORIZONTALMENTE
-    def devolver_casillas(self, direccion: chr) -> list[list[int]]:
-        # TODO metodo
-        pass
-
     def __iter__(self):
         # TODO metodo
         pass
