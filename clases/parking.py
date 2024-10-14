@@ -14,6 +14,7 @@ class Parking:
 
     # Carga el nivel actual en la lista de coches
     def cargar_nivel(self, nivel: int):
+        # TODO lectura del nivel
         pass
 
     def en_rango(fil, col) -> bool:
