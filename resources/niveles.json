@@ -1,56 +1,56 @@
 {
   "0": {
-    "filas": 7,
-    "columnas": 7,
+    "filas": 6,
+    "columnas": 6,
     "salida": [
-      6,
-      3
+      3,
+      7
     ],
-    "coches": []
+    "coches": ["H312", "V143", "H423", "V413"]
 
   },
 
   "1": {
-    "filas": 7,
-    "columnas": 7,
+    "filas": 6,
+    "columnas": 6,
     "salida": [
-      6,
-      3
+      3,
+      7
     ],
-    "coches": []
+    "coches": ["H322"]
 
   },
 
   "2": {
-    "filas": 7,
-    "columnas": 7,
+    "filas": 6,
+    "columnas": 6,
     "salida": [
-      6,
-      3
+      3,
+      7
     ],
-    "coches": []
+    "coches": ["H322"]
 
   },
 
   "3": {
-    "filas": 7,
-    "columnas": 7,
+    "filas": 6,
+    "columnas": 6,
     "salida": [
-      6,
-      3
+      3,
+      7
     ],
-    "coches": []
+    "coches": ["H322"]
 
   },
 
   "4": {
-    "filas": 7,
-    "columnas": 7,
+    "filas": 6,
+    "columnas": 6,
     "salida": [
-      6,
-      3
+      3,
+      7
     ],
-    "coches": []
+    "coches": ["H322"]
 
   }
 }
