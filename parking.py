@@ -13,9 +13,28 @@ class Parking:
         self.niveles_json = niveles_json
 
     # Carga el nivel actual en la lista de coches
-    def cargar_nivel(self, nivel: int):
-        # TODO lectura del nivel
-        pass
+    def cargar_nivel(self, nivel: int) -> bool:
+        try:
+            with open(self.niveles_json, "r") as json_f:
+                json_data: dict = json.load(json_f)
+
+                if len(json_data.keys()) < nivel:
+                    print("No existe ese nivel")
+                    return False
+
+                nivel_data: dict = json_data[f"{nivel}"]
+                self.filas = nivel_data["filas"]
+                self.columnas = nivel_data["columnas"]
+                self.salida = tuple(nivel_data["salida"])
+                self.coches = nivel_data["coches"]
+
+            self.nivel = nivel
+
+            return True
+
+        except Exception:
+            print(f"Error al cargar el nivel {nivel}")
+            return False
 
     def en_rango(fil, col) -> bool:
         # TODO Comprueba si la casilla es valida
