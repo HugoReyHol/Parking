@@ -1,4 +1,4 @@
-from coche import Coche
+from .coche import Coche
 
 
 class CocheV(Coche):

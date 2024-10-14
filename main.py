@@ -1,4 +1,4 @@
-from parking import Parking
+from clases.parking import Parking
 
 
 if __name__ == '__main__':
