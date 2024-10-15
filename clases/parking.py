@@ -30,7 +30,7 @@ class Parking:
                 self.salida = tuple(nivel_data["salida"])
                 self.coches.clear()
                 for c in nivel_data["coches"]:
-                    self.coches.append(self.crea_coches(len(self.coches), c))
+                    self.coches.append(self.__crea_coches(len(self.coches), c))
 
             self.nivel = nivel
 
@@ -40,23 +40,36 @@ class Parking:
             print(f"Error al cargar el nivel {nivel}: ", e)
             return False
 
-    def en_rango(fil, col) -> bool:
-        # TODO Comprueba si la casilla es valida
-        pass
+    # Comprueba si el movimiento esta dentro del parking
+    def __en_rango(self, pos: tuple[int, int]) -> bool:
+        return (pos[0] in range(1, self.filas+1) and pos[1] in range(1, self.columnas+1)) or pos == self.salida
 
-    def crea_coches(self, num_c: int, txt: str) -> Coche:
+    # Crea un coche dependiendo de su tipo
+    def __crea_coches(self, num_c: int, txt: str) -> Coche:
         let: chr = chr(num_c + 65)
 
         return CocheV(let, txt) if txt[0] == "V" else CocheH(let, txt)
 
-    def mover_coche(self, mov) -> bool:
-        # TODO metodo para procesar movimientos
-        pass
+    # Mueve el coche con el comando indicado, si se puede mueve devuelve True y si no False
+    def mover_coche(self, mov: chr) -> bool:
+        coche: Coche = next(filter(lambda c: str(mov).upper()[0] == c.letra, self.coches))
+        pos = coche.calcular_espacio(str(mov).isupper())
 
+        coords = [coord for c in self.coches for coord in c if c.letra != str(mov).upper()]
+        # Si no está en rango sale de la funcion
+        if (not self.__en_rango(pos)) or (pos in coords):
+            return False
+
+        coche.mover(str(mov).isupper())
+
+        return True
+
+    # Comprueba si la posicion de salida está en las coordenadas del primer coche
     def fin_nivel(self) -> bool:
-        # TODO metodo calcular fin nivel
+        return self.salida in [coord for coord in self.coches[0]]
         pass
 
+    # Imprime el estado actual del parking
     def __str__(self) -> str:
         p = [["#" if (c == 0 or c == self.columnas+1) or (f == 0 or f == self.filas+1) else " " for c in range(self.columnas+2)] for f in range(self.filas+2)]
         p[self.salida[0]][self.salida[1]] = " "

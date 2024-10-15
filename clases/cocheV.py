@@ -4,10 +4,9 @@ from .coche import Coche
 
 class CocheV(Coche):
 
-    # Calcula el movimiento VERTICALMENTE
-    def mover(self, direccion: chr) -> bool:
-        # TODO metodo
-        pass
+    # Realiza el movimiento VERTICALMENTE
+    def mover(self, direccion: bool) -> None:
+        self.pos = (self.pos[0]-1 if direccion else self.pos[0]+1, self.pos[1])
 
     # Calcula el espacio al que se va a mover VERTICALMENTE
     # Para moverse hacia delante dirreccion es true y marcha atras es false

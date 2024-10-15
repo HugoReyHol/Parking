@@ -3,10 +3,9 @@ from .coche import Coche
 
 
 class CocheH(Coche):
-    # Calcula el movimiento HORIZONTALMENTE
-    def mover(self, direccion: chr) -> bool:
-        # TODO metodo
-        pass
+    # Realiza el movimiento HORIZONTALMENTE
+    def mover(self, direccion: bool) -> None:
+        self.pos = (self.pos[0], self.pos[1]-1 if direccion else self.pos[1]+1)
 
     # Calcula el espacio al que se va a mover HORIZONTALMENTE
     # Para moverse hacia delante dirreccion es true y marcha atras es false

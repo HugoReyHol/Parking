@@ -11,9 +11,9 @@ class Coche(ABC):
 
     # Metodos abstractos que serán sobreescritos en sus hijos
     @abstractmethod
-    def mover(self, direccion: chr) -> bool:
+    def mover(self, direccion: bool) -> None:
         pass
 
     @abstractmethod
-    def calcular_espacio(self, direccion: chr) -> list[int]:
+    def calcular_espacio(self, direccion: chr) -> tuple[int, int]:
         pass
