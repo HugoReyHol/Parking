@@ -34,6 +34,8 @@ class Parking:
 
             self.nivel = nivel
 
+            print(f"Nivel {nivel}:")
+
             return True
 
         except Exception as e:
@@ -52,7 +54,13 @@ class Parking:
 
     # Mueve el coche con el comando indicado, si se puede mueve devuelve True y si no False
     def mover_coche(self, mov: chr) -> bool:
-        coche: Coche = next(filter(lambda c: str(mov).upper()[0] == c.letra, self.coches))
+        try:
+            coche: Coche = next(filter(lambda c: str(mov).upper()[0] == c.letra, self.coches))
+
+        except StopIteration:
+            print(f"Movimiento no válido, no hay un coche {str(mov).upper()}")
+            return False
+
         pos = coche.calcular_espacio(str(mov).isupper())
 
         coords = [coord for c in self.coches for coord in c if c.letra != str(mov).upper()]
