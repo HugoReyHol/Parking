@@ -1,6 +1,5 @@
 import json
 import time
-
 from clases.parking import Parking
 
 
