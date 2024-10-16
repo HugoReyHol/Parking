@@ -19,27 +19,33 @@ class Parking:
     # Devuelve True si ha cargado correctamente, si no False
     def cargar_nivel(self, nivel: int) -> bool:
         try:
+            # Abre el archivo json con los niveles
             with open(self.niveles_json, "r") as json_f:
+                # Lo carga como un diccionario
                 json_data: dict = json.load(json_f)
 
-                if len(json_data.keys()) < nivel:
-                    print("No existe ese nivel")
-                    return False
-
+                # Carga en otro diccionario el nivel seleccionado
                 nivel_data: dict = json_data[f"{nivel}"]
+
+                # Carga en las variables de la clase la información del nivel
                 self.filas = nivel_data["filas"]
                 self.columnas = nivel_data["columnas"]
                 self.salida = tuple(nivel_data["salida"])
+
+                # Borra los elementos de la lista coches por si viene de otro nivel
                 self.coches.clear()
+
+                # Por cada coche en la lista del nivel crea un coche y lo añade a la lista
                 for c in nivel_data["coches"]:
                     self.coches.append(self.__crea_coches(len(self.coches), c))
 
             self.nivel = nivel
 
-            print(f"Nivel {nivel}:")
+            print(f"Nivel {nivel}: ")
 
             return True
 
+        # Si detecta algún error lo muestra por pantalla
         except Exception as e:
             print(f"Error al cargar el nivel {nivel}: ", e)
             return False
@@ -48,12 +54,14 @@ class Parking:
     # Recibe una tupla con el movimiento a comprobar
     # Devuelve True si está dentro de los límites o False si está fuera
     def __en_rango(self, pos: tuple[int, int]) -> bool:
-        return (pos[0] in range(1, self.filas+1) and pos[1] in range(1, self.columnas+1)) or pos == self.salida
+        return (pos[0] in range(1, self.filas + 1) and pos[1] in range(1, self.columnas + 1)) or pos == self.salida
 
     # Crea un coche dependiendo de su tipo
     # Recibe el número del cocho y el texto con sus características
     # Devuelve un CocheV o un CocheH dependiendo del texto
     def __crea_coches(self, num_c: int, txt: str) -> Coche:
+        # Calcula la letra del coche dependiendo de su posición en la lista
+        # 65 es A en ASCII y le suma el valor actual
         let: chr = chr(num_c + 65)
 
         return CocheV(let, txt) if txt[0] == "V" else CocheH(let, txt)
@@ -88,7 +96,8 @@ class Parking:
 
     # Cambia el formato en el que se devuelve el parking al imprimirlo
     def __str__(self) -> str:
-        p = [["#" if (c == 0 or c == self.columnas+1) or (f == 0 or f == self.filas+1) else " " for c in range(self.columnas+2)] for f in range(self.filas+2)]
+        p = [["#" if (c == 0 or c == self.columnas + 1) or (f == 0 or f == self.filas + 1) else " " for c in
+              range(self.columnas + 2)] for f in range(self.filas + 2)]
         p[self.salida[0]][self.salida[1]] = " "
 
         for coche in self.coches:
@@ -98,7 +107,6 @@ class Parking:
             for _ in range(len(coord)):
                 c = coord.pop(0)
                 p[c[0]][c[1]] = letras.pop(0)
-
 
         cadena = ""
         for l in p:
