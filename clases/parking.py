@@ -15,6 +15,8 @@ class Parking:
         self.niveles_json = niveles_json
 
     # Carga el nivel actual en la lista de coches
+    # Recibe el número del nivel a cargar
+    # Devuelve True si ha cargado correctamente, si no False
     def cargar_nivel(self, nivel: int) -> bool:
         try:
             with open(self.niveles_json, "r") as json_f:
@@ -42,17 +44,23 @@ class Parking:
             print(f"Error al cargar el nivel {nivel}: ", e)
             return False
 
-    # Comprueba si el movimiento esta dentro del parking
+    # Comprueba si el movimiento está dentro del parking
+    # Recibe una tupla con el movimiento a comprobar
+    # Devuelve True si está dentro de los límites o False si está fuera
     def __en_rango(self, pos: tuple[int, int]) -> bool:
         return (pos[0] in range(1, self.filas+1) and pos[1] in range(1, self.columnas+1)) or pos == self.salida
 
     # Crea un coche dependiendo de su tipo
+    # Recibe el número del cocho y el texto con sus características
+    # Devuelve un CocheV o un CocheH dependiendo del texto
     def __crea_coches(self, num_c: int, txt: str) -> Coche:
         let: chr = chr(num_c + 65)
 
         return CocheV(let, txt) if txt[0] == "V" else CocheH(let, txt)
 
-    # Mueve el coche con el comando indicado, si se puede mueve devuelve True y si no False
+    # Mueve el coche con el comando indicado,
+    # Recibe una letra con el movimiento
+    # Devuelve True si se puede mover y si no False
     def mover_coche(self, mov: chr) -> bool:
         try:
             coche: Coche = next(filter(lambda c: str(mov).upper()[0] == c.letra, self.coches))
@@ -73,11 +81,12 @@ class Parking:
         return True
 
     # Comprueba si la posicion de salida está en las coordenadas del primer coche
+    # Devuelve True si es así, si no False
     def fin_nivel(self) -> bool:
         return self.salida in [coord for coord in self.coches[0]]
         pass
 
-    # Imprime el estado actual del parking
+    # Cambia el formato en el que se devuelve el parking al imprimirlo
     def __str__(self) -> str:
         p = [["#" if (c == 0 or c == self.columnas+1) or (f == 0 or f == self.filas+1) else " " for c in range(self.columnas+2)] for f in range(self.filas+2)]
         p[self.salida[0]][self.salida[1]] = " "
