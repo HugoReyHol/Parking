@@ -1,9 +1,15 @@
 import json
 import time
+from os import system, name
 from clases.parking import Parking
 
 
+def limpiar() -> None:
+    system("cls" if name == "nt" else "clear")
+
+
 if __name__ == '__main__':
+    limpiar()
     niveles_json: str = "resources/niveles.json"
 
     # Crea el objeto Parking para gestionar la partida
@@ -41,7 +47,7 @@ if __name__ == '__main__':
 
                 numMov += 1
 
-            print()
+            limpiar()
 
         # Al acabar el nivel muestra el estado final del Parking y las estadisticas del nivel
         print(parking)
@@ -49,3 +55,4 @@ if __name__ == '__main__':
 
         # Detiene la ejecución del programa 2,5 segundos para que el usuario pueda leer la información anterior
         time.sleep(2.5)
+        limpiar()

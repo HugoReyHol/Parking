@@ -102,7 +102,7 @@ class Parking:
 
     # Cambia el formato en el que se devuelve el parking al imprimirlo
     def __str__(self) -> str:
-        # Crea una matriz del tamaño del parking con con # en los bordes
+        # Crea una matriz del tamaño del parking con # en los bordes
         p = [["#" if (c == 0 or c == self.columnas + 1) or (f == 0 or f == self.filas + 1) else " " for c in
               range(self.columnas + 2)] for f in range(self.filas + 2)]
         # Vacía la casilla de salida
