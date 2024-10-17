@@ -15,5 +15,5 @@ class Coche(ABC):
         pass
 
     @abstractmethod
-    def calcular_espacio(self, direccion: chr) -> tuple[int, int]:
+    def calcular_espacio(self, direccion: bool) -> tuple[int, int]:
         pass
